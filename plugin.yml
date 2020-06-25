@@ -1,0 +1,146 @@
+name: Emotes
+main: io.github.com.jonashovden.emoteplugin.Main
+version: '1.0.0 - build 11'
+author: RevenantGaze
+api-version: 1.15
+website: http://dev.bukkit.org/bukkit-plugins/emotes/
+commands:
+  emotes:
+    description: Gives access to the /emotes command!
+    usage: /emotes
+    default: op
+    permission: emotes.command.emotes.use
+  emote:
+    description: Do a custom emote!
+    usage: /emote
+    default: op
+
+permissions:
+  emotes.*:
+    description: Gives access to all Emotes commands
+    children: 
+      emotes.command.*: true
+      emotes.command.emotes.*: true
+      emotes.command.emotes.cooldown: true
+      emotes.command.emotes.cooldown.*: true
+      emotes.command.emotes.cooldown.change: true
+      emotes.command.emotes.cooldown.default: true
+      emotes.command.emotes.cooldown.show: true
+      emotes.command.emotes.setdistance: true
+      emotes.command.emotes.version: true
+      emotes.command.emotes.use: true
+      emotes.emote.*: true
+      emotes.emote.edit.*: true
+      emotes.emote.edit.message: true
+      emotes.emote.edit.spmessage: true
+      emotes.emote.edit.description: true
+      emotes.emote.edit.permission: true
+      emotes.emote.new: true
+      emotes.emote.delete: true
+      emotes.emote.list: true
+      emotes.emote.help: true
+      emotes.emote.use.*: true     
+  emotes.command.*:
+    description: Gives access to all commands that needs the emotes.command permission
+    children:
+      emotes.command.emotes.*: true
+      emotes.command.emotes.cooldown: true
+      emotes.command.emotes.cooldown.*: true
+      emotes.command.emotes.cooldown.change: true
+      emotes.command.emotes.cooldown.default: true
+      emotes.command.emotes.cooldown.show: true
+      emotes.command.emotes.setdistance: true
+      emotes.command.emotes.version: true
+      emotes.command.emotes.use: true
+  emotes.command.argue:
+    description: Gives access to /argue
+    default: op
+  emotes.command.emotes.*:
+    description: Gives access to all /emotes commands
+    children:
+      emotes.command.emotes.cooldown: true
+      emotes.command.emotes.cooldown.*: true
+      emotes.command.emotes.cooldown.change: true
+      emotes.command.emotes.cooldown.default: true
+      emotes.command.emotes.cooldown.show: true
+      emotes.command.emotes.setdistance: true
+      emotes.command.emotes.version: true
+      emotes.command.emotes.use: true
+    default: op
+  emotes.command.emotes.cooldown:
+    description: Gives access to /emotes cooldown
+    default: op
+  emotes.command.emotes.cooldown.*:
+    description: Gives access to all /emotes cooldown commands
+    children:
+      emotes.command.emotes.cooldown.change: true
+      emotes.command.emotes.cooldown.default: true
+      emotes.command.emotes.cooldown.show: true
+    default: op
+  emotes.command.emotes.cooldown.change:
+    description: Gives access to /emotes cooldown change
+    default: op
+  emotes.command.emotes.cooldown.default:
+    description: Gives access to /emotes cooldown default
+    default: op
+  emotes.command.emotes.cooldown.show:
+    description: Gives access to /emotes cooldown show
+    default: op
+  emotes.command.emotes.setdistance:
+    description: Gives access to /emotes setdistance
+    default: op
+  emotes.command.emotes.version:
+    description: Gives access to /emotes version
+    default: op
+  emotes.command.emotes.use:
+    description: Gives access to /emotes
+    default: op
+  emotes.emote.*: 
+    description: Gives access to all /emote commands
+    children:
+      emotes.emote.edit.*: true
+      emotes.emote.edit.message: true
+      emotes.emote.edit.spmessage: true
+      emotes.emote.edit.description: true
+      emotes.emote.edit.permission: true
+      emotes.emote.new: true
+      emotes.emote.delete: true
+      emotes.emote.list: true
+      emotes.emote.help: true
+      emotes.emote.use.*: true
+    default: op
+  emotes.emote.edit.*:
+    description: Gives access to all /emote edit commands
+    children:
+      emotes.emote.edit.message: true
+      emotes.emote.edit.spmessage: true
+      emotes.emote.edit.description: true
+      emotes.emote.edit.permission: true
+    default: op
+  emotes.emote.edit.message:
+    description: Gives access to /emote edit message
+    default: op
+  emotes.emote.edit.spmessage:
+    description: Gives access to /emote edit spmessage
+    default: op
+  emotes.emote.edit.description:
+    description: Gives access to /emote edit description
+    default: op
+  emotes.emote.edit.permission:
+    description: Gives access to /emote edit permission
+    default: op
+  emotes.emote.new: 
+    description: Gives access to /emote new
+    default: op
+  emotes.emote.delete:
+    description: Gives access to /emote delete
+    default: op
+  emotes.emote.list:
+    description: Gives access to /emote
+    default: op
+  emotes.emote.help:
+    description: Gives access to /emote help
+    default: op
+  emotes.emote.use.*:
+    description: Gives access to use all custom emotes
+    default: op
