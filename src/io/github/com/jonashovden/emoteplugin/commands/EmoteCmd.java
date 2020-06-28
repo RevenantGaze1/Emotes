@@ -584,11 +584,6 @@ public class EmoteCmd implements CommandExecutor {
 												World targetWorld = p
 														.getWorld();
 
-												double senderLocation = senderPlayer
-														.getLocation()
-														.distanceSquared(
-																p.getLocation());
-
 												if (emotesDistance == -1) {
 
 													String emoteLanguageString = plugin
@@ -644,6 +639,11 @@ public class EmoteCmd implements CommandExecutor {
 																.getWorld();
 
 														if (senderWorld == targetWarningWorld) {
+															
+															double senderLocation = senderPlayer
+																	.getLocation()
+																	.distanceSquared(
+																			p.getLocation());
 
 															int senderDistance = (int) Math
 																	.round(senderLocation);
@@ -683,6 +683,11 @@ public class EmoteCmd implements CommandExecutor {
 												else {
 
 													if (senderWorld == targetWorld) {
+														
+														double senderLocation = senderPlayer
+																.getLocation()
+																.distanceSquared(
+																		p.getLocation());
 
 														if (senderLocation < distanceSquared) {
 
