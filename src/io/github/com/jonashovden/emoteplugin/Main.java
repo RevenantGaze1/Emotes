@@ -41,13 +41,13 @@ public class Main extends JavaPlugin {
 
 			this.getConfig()
 					.options()
-					.header("Default config file for Emotes "
+					.header("Default config file for Emotes v"
 							+ this.getDescription().getVersion());
 
 			ConfigurationSection cooldownSection = this.getConfig()
 					.createSection("cooldown");
 
-			this.getConfig().set("cooldown.cooldown", 10);
+			this.getConfig().set("cooldown.duration", 10);
 			this.getConfig().set("cooldown.default", 10);
 			this.getConfig().set("emotes-distance", 40);
 			this.getConfig().set("use-default-emotes", true);
@@ -125,6 +125,8 @@ public class Main extends JavaPlugin {
 
 		getCommand("emotes").setExecutor(new EmotesCmd(this));
 		getCommand("emote").setExecutor(new EmoteCmd(this));
+		
+		Cooldown cooldown = new Cooldown (this);
 
 		boolean checkDefaultUse = this.getConfig().getBoolean(
 				"use-default-emotes");

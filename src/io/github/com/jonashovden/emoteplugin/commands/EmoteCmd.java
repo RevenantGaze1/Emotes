@@ -14,7 +14,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 
-public class EmoteCmd implements CommandExecutor {
+public class EmoteCmd implements CommandExecutor{
 
 	public Main plugin;
 
@@ -28,10 +28,12 @@ public class EmoteCmd implements CommandExecutor {
 			String[] args) {
 
 		if (cmd.getName().equalsIgnoreCase("emote")) {
+			
+			Player senderPlayer;
 
 			if (sender instanceof Player) {
 
-				Player senderPlayer = (Player) sender;
+				senderPlayer = (Player) sender;
 
 				if (args.length == 0) {
 
@@ -219,11 +221,11 @@ public class EmoteCmd implements CommandExecutor {
 								Long lastEmote = Cooldown.lastEmote
 										.get(senderPlayer.getName());
 
-								int CooldownValue = plugin.getConfig().getInt(
-										"cooldown.cooldown");
+								int cooldownDurationValue = plugin.getConfig().getInt(
+										"cooldown.duration");
 
 								if (lastEmote == null
-										|| lastEmote + (CooldownValue * 1000) < System
+										|| lastEmote + (cooldownDurationValue * 1000) < System
 												.currentTimeMillis()) {
 
 									int emotesDistance = plugin.getConfig()
@@ -323,11 +325,11 @@ public class EmoteCmd implements CommandExecutor {
 
 								else {
 
-									int cooldown = (int) (CooldownValue - ((System
+									int cooldown = (int) (cooldownDurationValue - ((System
 											.currentTimeMillis() - (Cooldown.lastEmote
 											.get(senderPlayer.getName()))) / 1000));
 
-									String emoteCooldownWarning = plugin
+									String cooldownWarning = plugin
 											.getConfig()
 											.getString(
 													"language-string.stillcooldown");
@@ -335,7 +337,7 @@ public class EmoteCmd implements CommandExecutor {
 											.toString(cooldown);
 
 									senderPlayer
-											.sendMessage(emoteCooldownWarning
+											.sendMessage(cooldownWarning
 													.replace("<cooldown>",
 															cooldownLeft)
 													.replaceAll(
@@ -555,12 +557,18 @@ public class EmoteCmd implements CommandExecutor {
 										Long lastEmote = Cooldown.lastEmote
 												.get(senderPlayer.getName());
 
-										int CooldownValue = plugin.getConfig()
-												.getInt("cooldown.cooldown");
+										int cooldownDurationValue = plugin.getConfig()
+												.getInt("cooldown.duration");
+										
+										if (Cooldown.cooldownFinished(senderPlayer)) {
+											
+											Bukkit.getLogger().info("Boolean cooldownFinished is working!");
+											
+										}
 
 										if (lastEmote == null
 												|| lastEmote
-														+ (CooldownValue * 1000) < System
+														+ (cooldownDurationValue * 1000) < System
 															.currentTimeMillis()) {
 
 											int emotesDistance = plugin
@@ -586,7 +594,7 @@ public class EmoteCmd implements CommandExecutor {
 
 												if (emotesDistance == -1) {
 
-													String emoteLanguageString = plugin
+													String emotemessageLanguageString = plugin
 															.getConfig()
 															.getString(
 																	"language-string.emote");
@@ -596,10 +604,10 @@ public class EmoteCmd implements CommandExecutor {
 																	"emotes."
 																			+ emoteName
 																			+ ".message");
-													String emoteMessageWithName = emoteMessage
+													String emotemessageWithName = emoteMessage
 															.replace("<s>",
 																	senderName);
-													String emoteMessageWithNames = emoteMessageWithName
+													String emotemessageWithNames = emotemessageWithName
 															.replace("<t>",
 																	targetName);
 													String emoteColour = plugin
@@ -608,13 +616,13 @@ public class EmoteCmd implements CommandExecutor {
 																	"emotes."
 																			+ emoteName
 																			+ ".colour");
-													String emoteColoured = (emoteColour + emoteMessageWithNames)
+													String emotemessageColoured = (emoteColour + emotemessageWithNames)
 															.replaceAll(
 																	"(&([a-f0-9]))",
 																	"\u00A7$2");
-													String emoteLanguage = emoteLanguageString
+													String emoteLanguage = emotemessageLanguageString
 															.replace("<emote>",
-																	emoteColoured)
+																	emotemessageColoured)
 															.replaceAll(
 																	"(&([a-f0-9]))",
 																	"\u00A7$2");
@@ -799,11 +807,11 @@ public class EmoteCmd implements CommandExecutor {
 
 										else {
 
-											int cooldown = (int) (CooldownValue - ((System
+											int cooldown = (int) (cooldownDurationValue - ((System
 													.currentTimeMillis() - (Cooldown.lastEmote
 													.get(senderPlayer.getName()))) / 1000));
 
-											String emoteCooldownWarning = plugin
+											String cooldownWarning = plugin
 													.getConfig()
 													.getString(
 															"language-string.stillcooldown");
@@ -811,7 +819,7 @@ public class EmoteCmd implements CommandExecutor {
 													.toString(cooldown);
 
 											senderPlayer
-													.sendMessage(emoteCooldownWarning
+													.sendMessage(cooldownWarning
 															.replace(
 																	"<cooldown>",
 																	cooldownLeft)
