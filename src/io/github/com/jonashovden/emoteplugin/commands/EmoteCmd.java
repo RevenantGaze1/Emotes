@@ -218,14 +218,14 @@ public class EmoteCmd implements CommandExecutor{
 
 							else {
 
-								Long lastEmote = Cooldown.lastEmote
+								Long lastEmoteInstance = Cooldown.lastEmote
 										.get(senderPlayer.getName());
 
 								int cooldownDurationValue = plugin.getConfig().getInt(
 										"cooldown.duration");
 
-								if (lastEmote == null
-										|| lastEmote + (cooldownDurationValue * 1000) < System
+								if (lastEmoteInstance == null
+										|| lastEmoteInstance + (cooldownDurationValue * 1000) < System
 												.currentTimeMillis()) {
 
 									int emotesDistance = plugin.getConfig()
@@ -423,7 +423,7 @@ public class EmoteCmd implements CommandExecutor{
 							else {
 
 								senderPlayer.sendMessage(ChatColor.RED
-										+ "This command does already exist");
+										+ "This command does already exist!");
 
 								return true;
 
@@ -571,6 +571,11 @@ public class EmoteCmd implements CommandExecutor{
 														+ (cooldownDurationValue * 1000) < System
 															.currentTimeMillis()) {
 
+											boolean showTargetWarning = plugin
+													.getConfig()
+													.getBoolean(
+															"show-target-warning");
+
 											int emotesDistance = plugin
 													.getConfig().getInt(
 															"emotes-distance");
@@ -583,11 +588,6 @@ public class EmoteCmd implements CommandExecutor{
 
 											for (Player p : Bukkit
 													.getOnlinePlayers()) {
-
-												boolean showTargetWarning = plugin
-														.getConfig()
-														.getBoolean(
-																"show-target-warning");
 
 												World targetWorld = p
 														.getWorld();
@@ -628,63 +628,6 @@ public class EmoteCmd implements CommandExecutor{
 																	"\u00A7$2");
 
 													p.sendMessage(emoteLanguage);
-
-													if (showTargetWarning == true) {
-
-														String emoteWarningString1 = plugin
-																.getConfig()
-																.getString(
-																		"language-string.warning.sameworld");
-														String emoteWarningString2 = plugin
-																.getConfig()
-																.getString(
-																		"language-string.warning.diffworld");
-
-														Player targetPlayer = Bukkit
-																.getPlayer(targetName);
-
-														World targetWarningWorld = targetPlayer
-																.getWorld();
-
-														if (senderWorld == targetWarningWorld) {
-															
-															double senderLocation = senderPlayer
-																	.getLocation()
-																	.distanceSquared(
-																			p.getLocation());
-
-															int senderDistance = (int) Math
-																	.round(senderLocation);
-
-															String senderDistanceString = Integer
-																	.toString(senderDistance);
-
-															targetPlayer
-																	.sendMessage(emoteWarningString1
-																			.replace(
-																					"<distance>",
-																					senderDistanceString)
-																			.replace(
-																					"<sender>",
-																					senderPlayer
-																							.getName())
-																			.replaceAll(
-																					"(&([a-f0-9]))",
-																					"\u00A7$2"));
-
-														}
-
-														else {
-
-															targetPlayer
-																	.sendMessage(emoteWarningString2
-																			.replaceAll(
-																					"(&([a-f0-9]))",
-																					"\u00A7$2"));
-
-														}
-
-													}
 
 												}
 
@@ -737,58 +680,6 @@ public class EmoteCmd implements CommandExecutor{
 
 															p.sendMessage(emoteLanguage);
 
-															if (showTargetWarning == true) {
-
-																String emoteWarningString1 = plugin
-																		.getConfig()
-																		.getString(
-																				"language-string.warning.sameworld");
-																String emoteWarningString2 = plugin
-																		.getConfig()
-																		.getString(
-																				"language-string.warning.diffworld");
-
-																Player targetPlayer = Bukkit
-																		.getPlayer(targetName);
-
-																World targetWarningWorld = targetPlayer
-																		.getWorld();
-
-																if (senderWorld == targetWarningWorld) {
-
-																	int senderDistance = (int) Math
-																			.round(senderLocation);
-
-																	String senderDistanceString = Integer
-																			.toString(senderDistance);
-
-																	targetPlayer
-																			.sendMessage(emoteWarningString1
-																					.replace(
-																							"<distance>",
-																							senderDistanceString)
-																					.replace(
-																							"<sender>",
-																							senderPlayer
-																									.getName())
-																					.replaceAll(
-																							"(&([a-f0-9]))",
-																							"\u00A7$2"));
-
-																}
-
-																else {
-
-																	targetPlayer
-																			.sendMessage(emoteWarningString2
-																					.replaceAll(
-																							"(&([a-f0-9]))",
-																							"\u00A7$2"));
-
-																}
-
-															}
-
 														}
 
 													}
@@ -796,7 +687,64 @@ public class EmoteCmd implements CommandExecutor{
 												}
 
 											}
+											
+											if (showTargetWarning == true) {
 
+												String emoteWarningString1 = plugin
+														.getConfig()
+														.getString(
+																"language-string.warning.sameworld");
+												String emoteWarningString2 = plugin
+														.getConfig()
+														.getString(
+																"language-string.warning.diffworld");
+
+												Player targetPlayer = Bukkit
+														.getPlayer(targetName);
+
+												World targetWarningWorld = targetPlayer
+														.getWorld();
+
+												if (senderWorld == targetWarningWorld) {
+													
+													double senderLocation = senderPlayer
+															.getLocation()
+															.distanceSquared(
+																	targetPlayer.getLocation());
+
+													int senderDistance = (int) Math
+															.round(senderLocation);
+
+													String senderDistanceString = Integer
+															.toString(senderDistance);
+
+													targetPlayer
+															.sendMessage(emoteWarningString1
+																	.replace(
+																			"<distance>",
+																			senderDistanceString)
+																	.replace(
+																			"<sender>",
+																			senderPlayer
+																					.getName())
+																	.replaceAll(
+																			"(&([a-f0-9]))",
+																			"\u00A7$2"));
+
+												}
+
+												else {
+
+													targetPlayer
+															.sendMessage(emoteWarningString2
+																	.replaceAll(
+																			"(&([a-f0-9]))",
+																			"\u00A7$2"));
+
+												}
+
+											}
+											
 											Cooldown.lastEmote.put(
 													senderPlayer.getName(),
 													System.currentTimeMillis());
@@ -804,7 +752,7 @@ public class EmoteCmd implements CommandExecutor{
 											return true;
 
 										}
-
+										
 										else {
 
 											int cooldown = (int) (cooldownDurationValue - ((System
@@ -840,12 +788,12 @@ public class EmoteCmd implements CommandExecutor{
 
 										return true;
 
-									}
+									}	
 
 								}
 
 							}
-
+							
 							else {
 
 								String noPermMessage = plugin.getEmoteConfig()

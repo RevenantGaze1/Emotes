@@ -1,4 +1,4 @@
-# Default config file for Emotes 1.0.2 - build 15
+# Default config file for Emotes <version>
 cooldown:
   duration: 10
   default: 10
