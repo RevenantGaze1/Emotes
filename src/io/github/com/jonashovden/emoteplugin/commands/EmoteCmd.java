@@ -709,7 +709,7 @@ public class EmoteCmd implements CommandExecutor{
 													
 													double senderLocation = senderPlayer
 															.getLocation()
-															.distanceSquared(
+															.distance(
 																	targetPlayer.getLocation());
 
 													int senderDistance = (int) Math
