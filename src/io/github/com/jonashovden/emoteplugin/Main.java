@@ -2,6 +2,7 @@ package io.github.com.jonashovden.emoteplugin;
 
 import io.github.com.jonashovden.emoteplugin.commands.EmoteCmd;
 import io.github.com.jonashovden.emoteplugin.commands.EmotesCmd;
+import io.github.com.jonashovden.emoteplugin.Metrics;
 
 import java.io.File;
 import java.io.IOException;
@@ -32,10 +33,16 @@ public class Main extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
+		
+		//Enabling bStats
+		int pluginId = 8450;
+		
+		Metrics metrics = new Metrics(this, pluginId);
 
+		//Check for config file config.yml
 		if (!defaultConfigFile.exists()) {
 
-			getLogger().info("Generating default config file...");
+			getLogger().info("[Emotes] Generating default config file...");
 
 			this.saveResource("config.yml", false);
 
@@ -74,13 +81,13 @@ public class Main extends JavaPlugin {
 
 		else {
 
-			getLogger().info("Found Config.yml");
+			getLogger().info("[Emotes] Found Config.yml");
 
 		}
 
 		if (!emoteConfigFile.exists()) {
 
-			getLogger().info("Generating Emotes.yml...");
+			getLogger().info("[Emotes] Generating Emotes.yml...");
 
 			this.getEmoteConfig()
 					.options()
@@ -113,13 +120,13 @@ public class Main extends JavaPlugin {
 
 			this.saveEmoteConfig();
 
-			getLogger().info("Emotes.yml has been generated!");
+			getLogger().info("[Emotes] Emotes.yml has been generated!");
 
 		}
 
 		else {
 
-			getLogger().info("Found Emotes.yml");
+			getLogger().info("[Emotes] Found Emotes.yml");
 
 		}
 
