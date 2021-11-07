@@ -53,6 +53,7 @@ public class Main extends JavaPlugin {
 			this.getConfig().set("cooldown.default", 10);
 			this.getConfig().set("emotes-distance", 40);
 			this.getConfig().set("use-default-emotes", true);
+			this.getConfig().set("use-short-list", true);
 			this.getConfig().set("show-target-warning", true);
 			this.getConfig().set("language-string.emote",
 					"&7[&6Emotes&7] <emote>");
@@ -737,11 +738,6 @@ public class Main extends JavaPlugin {
 			getLogger().info("Default emotes are disabled!");
 
 		}
-		
-		List<String> customEmoteList = this.getEmoteConfig()
-				.getStringList("emotes-list");
-		
-		String emotesListString = String.join(",", customEmoteList);
 
 		getLogger().info(
 				"Emotes v" + this.getDescription().getVersion()

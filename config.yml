@@ -4,6 +4,7 @@ cooldown:
   default: 10
 emotes-distance: 40
 use-default-emotes: true
+use-short-list: true
 show-target-warning: true
 language-string:
   emote: '&7[&6Emotes&7] <emote>'

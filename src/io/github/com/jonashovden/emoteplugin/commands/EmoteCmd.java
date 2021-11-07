@@ -45,41 +45,49 @@ public class EmoteCmd implements CommandExecutor{
 						senderPlayer.sendMessage(ChatColor.AQUA
 								+ "Available custom emotes:");
 						
-						String emotesListString = String.join(",", customEmoteList);
+						if (plugin.getConfig().getBoolean("use-short-list") == true) {
 						
-						senderPlayer.sendMessage(emotesListString);
+							String emotesListString = String.join(", ", customEmoteList);
+						
+							senderPlayer.sendMessage(ChatColor.BLUE + emotesListString);
+						
+						} 
+						
+						else {
 
-						for (String customEmote : customEmoteList) {
-
-							String emoteDescription = plugin.getEmoteConfig()
-									.getString(
-											"emotes." + customEmote
-													+ ".description");
-
-							if (emoteDescription
-									.equalsIgnoreCase("no description! add it now!")) {
-
-								senderPlayer.sendMessage(ChatColor.BLUE
-										+ "/emote use " + customEmote
-										+ ChatColor.GREEN + " <player>"
-										+ ChatColor.AQUA + " - "
-										+ ChatColor.RED + emoteDescription);
-
-							}
-
-							else {
-
-								senderPlayer.sendMessage(ChatColor.BLUE
-										+ "/emote use " + customEmote
-										+ ChatColor.GREEN + " <player>"
-										+ ChatColor.AQUA + " - "
-										+ ChatColor.DARK_AQUA
-										+ emoteDescription);
-
+							for (String customEmote : customEmoteList) {
+	
+								String emoteDescription = plugin.getEmoteConfig()
+										.getString(
+												"emotes." + customEmote
+														+ ".description");
+	
+								if (emoteDescription
+										.equalsIgnoreCase("no description! add it now!")) {
+	
+									senderPlayer.sendMessage(ChatColor.BLUE
+											+ "/emote use " + customEmote
+											+ ChatColor.GREEN + " <player>"
+											+ ChatColor.AQUA + " - "
+											+ ChatColor.RED + emoteDescription);
+	
+								}
+	
+								else {
+	
+									senderPlayer.sendMessage(ChatColor.BLUE
+											+ "/emote use " + customEmote
+											+ ChatColor.GREEN + " <player>"
+											+ ChatColor.AQUA + " - "
+											+ ChatColor.DARK_AQUA
+											+ emoteDescription);
+	
+								}
+	
 							}
 
 						}
-
+						
 						return true;
 
 					}
