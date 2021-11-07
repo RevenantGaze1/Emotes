@@ -127,14 +127,14 @@ public class Main extends JavaPlugin {
 		}
 		
 		
-		if (this.getConfig().getBoolean("enable_metrics") == true) {
+		if (this.getConfig().getBoolean("enable-metrics") == true) {
 			
 			//Enabling bStats
 			int pluginId = 8450;
 			
 			Metrics metrics = new Metrics(this, pluginId);
 			
-			getLogger().info("Thank you for enabling metrics! If you want to opt-out from statistic tracking, disable it in the config.");
+			getLogger().info("Thank you for enabling metrics - if you want to opt-out from statistic tracking, disable it in the config.");
 			
 		}
 		
@@ -737,6 +737,11 @@ public class Main extends JavaPlugin {
 			getLogger().info("Default emotes are disabled!");
 
 		}
+		
+		List<String> customEmoteList = this.getEmoteConfig()
+				.getStringList("emotes-list");
+		
+		String emotesListString = String.join(",", customEmoteList);
 
 		getLogger().info(
 				"Emotes v" + this.getDescription().getVersion()

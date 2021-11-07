@@ -44,6 +44,10 @@ public class EmoteCmd implements CommandExecutor{
 
 						senderPlayer.sendMessage(ChatColor.AQUA
 								+ "Available custom emotes:");
+						
+						String emotesListString = String.join(",", customEmoteList);
+						
+						senderPlayer.sendMessage(emotesListString);
 
 						for (String customEmote : customEmoteList) {
 

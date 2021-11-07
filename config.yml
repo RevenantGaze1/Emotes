@@ -15,3 +15,4 @@ language-string:
   stillcooldown: '&7[&6Emotes&7] &bYou have &c<cooldown> &bseconds left before you
     can use another emote.'
 no-permission-message: You do not have permission to use this emote!
+enable-metrics: true

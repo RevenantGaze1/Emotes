@@ -1,6 +1,6 @@
 name: Emotes
 main: io.github.com.jonashovden.emoteplugin.Main
-version: '1.0.4-a1 - build 28'
+version: '1.0.4-a1 - build 30'
 author: RevenantGaze
 api-version: 1.15
 website: http://dev.bukkit.org/bukkit-plugins/emotes/
