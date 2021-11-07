@@ -33,16 +33,11 @@ public class Main extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
-		
-		//Enabling bStats
-		int pluginId = 8450;
-		
-		Metrics metrics = new Metrics(this, pluginId);
 
 		//Check for config file config.yml
 		if (!defaultConfigFile.exists()) {
 
-			getLogger().info("[Emotes] Generating default config file...");
+			getLogger().info("Generating default config file...");
 
 			this.saveResource("config.yml", false);
 
@@ -72,6 +67,7 @@ public class Main extends JavaPlugin {
 							"&7[&6Emotes&7] &bYou have &c<cooldown> &bseconds left before you can use another emote.");
 			this.getConfig().set("no-permission-message",
 					"You do not have permission to use this emote!");
+			this.getConfig().set("enable_metrics", true);
 
 			saveConfig();
 
@@ -81,13 +77,13 @@ public class Main extends JavaPlugin {
 
 		else {
 
-			getLogger().info("[Emotes] Found Config.yml");
+			getLogger().info("Found Config.yml");
 
 		}
 
 		if (!emoteConfigFile.exists()) {
 
-			getLogger().info("[Emotes] Generating Emotes.yml...");
+			getLogger().info("Generating Emotes.yml...");
 
 			this.getEmoteConfig()
 					.options()
@@ -120,14 +116,32 @@ public class Main extends JavaPlugin {
 
 			this.saveEmoteConfig();
 
-			getLogger().info("[Emotes] Emotes.yml has been generated!");
+			getLogger().info("Emotes.yml has been generated!");
 
 		}
 
 		else {
 
-			getLogger().info("[Emotes] Found Emotes.yml");
+			getLogger().info("Found Emotes.yml");
 
+		}
+		
+		
+		if (this.getConfig().getBoolean("enable_metrics") == true) {
+			
+			//Enabling bStats
+			int pluginId = 8450;
+			
+			Metrics metrics = new Metrics(this, pluginId);
+			
+			getLogger().info("Thank you for enabling metrics! If you want to opt-out from statistic tracking, disable it in the config.");
+			
+		}
+		
+		else {
+			
+			getLogger().info("Metrics disabled!");
+			
 		}
 
 		getCommand("emotes").setExecutor(new EmotesCmd(this));
