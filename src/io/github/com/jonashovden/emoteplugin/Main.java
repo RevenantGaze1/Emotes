@@ -68,7 +68,7 @@ public class Main extends JavaPlugin {
 							"&7[&6Emotes&7] &bYou have &c<cooldown> &bseconds left before you can use another emote.");
 			this.getConfig().set("no-permission-message",
 					"You do not have permission to use this emote!");
-			this.getConfig().set("enable_metrics", true);
+			this.getConfig().set("enable-metrics", true);
 
 			saveConfig();
 

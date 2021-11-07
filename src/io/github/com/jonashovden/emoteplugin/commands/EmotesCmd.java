@@ -128,11 +128,11 @@ public class EmotesCmd implements CommandExecutor {
 						you.sendMessage(ChatColor.BLUE + "Emotes version "
 								+ ChatColor.RED
 								+ plugin.getDescription().getVersion()
-								+ ChatColor.BLUE + " for Bukkit/Spigot version "
+								+ ChatColor.BLUE + " for Bukkit/Spigot/Paper version "
 								//+ ChatColor.RED + serverVersion
 								+ ChatColor.RED + "1.15.2"
 								+ ChatColor.BLUE + " to "
-								+ ChatColor.RED + "1.16.1"
+								+ ChatColor.RED + "1.17.1"
 								+ ChatColor.BLUE + "!");
 
 						return true;
